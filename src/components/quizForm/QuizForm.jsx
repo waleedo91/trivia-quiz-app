@@ -1,42 +1,56 @@
 import { useState } from "react";
 
-import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-// TODO Figure out how to cross reference the right answer and wrong answers to the api. 
+import { Form, Button } from "react-bootstrap";
+
+// TODO Figure out how to cross reference the right answer and wrong answers to the api.
 
 function QuizForm({ questions }) {
-  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [selectedAnswers, setSelectedAnswers] = useState([
+    {
+      selectedAnswer: "",
+      correctAnswer: "",
+    },
+  ]);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setSelectedAnswers((prevAnswers) => [...prevAnswers, e.target.value]);
+    setSelectedAnswers([
+      ...selectedAnswers,
+      {
+        selectedAnswer: e.target.value,
+        correctAnswer: questions.map((answer) => answer.correct_answer),
+      },
+    ]);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // navigate("/results", { state: selectedAnswers });
+    console.log(selectedAnswers);
+  };
 
   return (
     <>
-      <Form>
-        {questions.map((question, qIndex) => (
-          <Form.Group key={qIndex}>
+      <Form onSubmit={handleSubmit}>
+        {questions.map((question, i) => (
+          <Form.Group key={i}>
             <p>{question.question}</p>
-            {question.incorrect_answers.map((wrong, index) => (
+            {question.answers.map((answer, index) => (
               <Form.Check
-                type="radio"
-                label={wrong}
-                name={`answers ${qIndex}`}
-                value={wrong}
                 key={index}
+                type="radio"
+                name={`answer ${i}`}
+                id={`answer ${i}`}
+                label={answer}
                 onChange={handleChange}
+                value={answer}
               />
             ))}
-            <Form.Check
-              type="radio"
-              label={question.correct_answer}
-              name={`answers ${qIndex}`}
-              value={question.correct_answer}
-              onChange={handleChange}
-            />
           </Form.Group>
         ))}
+        <Button type="submit">Submit!</Button>
       </Form>
     </>
   );

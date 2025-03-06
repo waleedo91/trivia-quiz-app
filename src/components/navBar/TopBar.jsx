@@ -10,6 +10,7 @@ function TopBar() {
       className="bg-body-tertiary navigation-bar"
       bg="dark"
       data-bs-theme="dark"
+      sticky="top"
     >
       <Container>
         <Navbar.Brand href="#home">
