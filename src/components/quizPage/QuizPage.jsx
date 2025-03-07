@@ -9,6 +9,7 @@ function QuizPage() {
   const userData = location.state;
   const [questions, setQuestions] = useState([
     {
+      id: "",
       question: "",
       answers: [],
       correctAnswer: "",
@@ -23,7 +24,9 @@ function QuizPage() {
       );
       const extractedData = response.data.results.map((item) => ({
         question: item.question,
-        answers: [...item.incorrect_answers, item.correct_answer],
+        answers: [...item.incorrect_answers, item.correct_answer].sort(
+          () => Math.random() - 0.5
+        ),
         correctAnswer: item.correct_answer,
       }));
 
