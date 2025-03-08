@@ -3,7 +3,8 @@ import { Button } from "react-bootstrap";
 
 import "./Results.css";
 
-function ResultsPage({ score, questions, userAnswers }) {
+function ResultsPage({ score, questions, userAnswers, name }) {
+  console.log(name);
   return (
     <div className="text-center p-5">
       <h2 className="text-2xl font-bold">All Done!</h2>
@@ -14,7 +15,7 @@ function ResultsPage({ score, questions, userAnswers }) {
         </strong>{" "}
         / {questions.length}
       </p>
-      <h3 className="text-xl mt-4 font-bold">Let's see how ya did!</h3>
+      <h3 className="text-xl mt-4 font-bold">Let's see how ya did {name}!</h3>
       <div className="text-left mt-4">
         {userAnswers.map((answer, index) => (
           <div key={index} className="results-card">

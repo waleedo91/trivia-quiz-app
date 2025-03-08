@@ -19,6 +19,7 @@ function UserInfo() {
     }));
     setErrors({ ...errors, [e.target.name]: "" });
   };
+  console.log(userInfo);
 
   const handleSubmit = (e) => {
     e.preventDefault(e);

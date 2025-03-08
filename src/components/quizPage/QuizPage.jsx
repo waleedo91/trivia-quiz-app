@@ -10,9 +10,9 @@ import "./QuizPage.css";
 function QuizPage() {
   const location = useLocation();
   const userData = location.state;
+  const [name, setName] = useState("");
   const [questions, setQuestions] = useState([
     {
-      id: "",
       question: "",
       answers: [],
       correctAnswer: "",
@@ -35,13 +35,13 @@ function QuizPage() {
 
       setQuestions(extractedData);
     }
-    getQuestions();
-  }, [userData.category, userData.difficulty]);
 
+    getQuestions();
+  }, [userData.category, userData.difficulty, userData.name]);
+  console.log(name);
   return (
     <>
-      <QuizForm questions={questions} />
-      
+      <QuizForm questions={questions} name={name} />
     </>
   );
 }

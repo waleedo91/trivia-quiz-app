@@ -9,20 +9,18 @@ import Results from "../resultsPage/Results";
 
 // TODO Figure out how to cross reference the right answer and wrong answers to the api.
 
-function QuizForm({ questions }) {
+function QuizForm({ questions, name }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [userAnswers, setUserAnswers] = useState([]);
-  console.log(questions.length);
-  console.log(currentQuestion + 1);
-
+  console.log(questions);
   const handleSubmit = (e) => {
     e.preventDefault();
     const isCorrect =
       selectedAnswer === questions[currentQuestion].correctAnswer;
-    console.log(userAnswers);
+
     setUserAnswers([
       ...userAnswers,
       {
@@ -31,6 +29,7 @@ function QuizForm({ questions }) {
         isCorrect,
       },
     ]);
+
     if (selectedAnswer === questions[currentQuestion].correctAnswer) {
       setScore(score + 1);
     }
@@ -38,10 +37,8 @@ function QuizForm({ questions }) {
     if (currentQuestion + 1 < questions.length) {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer("");
-      console.log(quizCompleted);
     } else {
       setQuizCompleted(true);
-      console.log(quizCompleted);
     }
 
     if (questions.length === 0) {
@@ -105,6 +102,7 @@ function QuizForm({ questions }) {
           score={score}
           questions={questions}
           userAnswers={userAnswers}
+          name={name}
         />
       )}
     </>
