@@ -1,8 +1,11 @@
 import { useState } from "react";
 
-import { useNavigate, Link } from "react-router-dom";
-
 import { Form, Button, Card } from "react-bootstrap";
+
+import { Link } from "react-router-dom";
+
+import "./QuizForm.css";
+import Results from "../resultsPage/Results";
 
 // TODO Figure out how to cross reference the right answer and wrong answers to the api.
 
@@ -60,63 +63,50 @@ function QuizForm({ questions }) {
   return (
     <>
       {!quizCompleted ? (
-        <Card>
+        <Card className="question-container">
           <Card.Text>
             {currentQuestion + 1}. {questions[currentQuestion].question}
           </Card.Text>
-          <form>
+          <Form className="answers-container">
             {questions[currentQuestion].answers.map((answer, index) => (
-              <label key={index}>
-                <input
-                  type="radio"
-                  name="answer"
-                  value={answer}
-                  checked={selectedAnswer === answer}
-                  onChange={(e) => setSelectedAnswer(e.target.value)}
-                />
-                {answer}
-              </label>
+              <Form.Check
+                key={index}
+                className="radio-answers"
+                type="radio"
+                name="answer"
+                label={answer}
+                value={answer}
+                checked={selectedAnswer === answer}
+                onChange={(e) => setSelectedAnswer(e.target.value)}
+              />
             ))}
-          </form>
-          <Button onClick={handleSubmit} disabled={!selectedAnswer}>
-            {currentQuestion + 1 < questions.length
-              ? "NextQuestion"
-              : "Finish Quiz"}
-          </Button>
+          </Form>
+          <div className="button-container">
+            <div className="next-button">
+              <Button
+                className="next-button"
+                onClick={handleSubmit}
+                disabled={!selectedAnswer}
+              >
+                {currentQuestion + 1 < questions.length
+                  ? "NextQuestion"
+                  : "Finish Quiz"}
+              </Button>
+            </div>
+            <div className="reset-button">
+              <Link to={"/"}>
+                <Button>Reset?</Button>
+              </Link>
+            </div>
+          </div>
         </Card>
       ) : (
-        <div className="text-center p-5">
-          <h2 className="text-2xl font-bold">Quiz Completed!</h2>
-          <p className="text-lg font-semibold">
-            Your Score: {score} / {questions.length}
-          </p>
-          <h3 className="text-xl mt-4 font-bold">Review Your Answers:</h3>
-          <div className="text-left mt-4">
-            {userAnswers.map((answer, index) => (
-              <div key={index} className="p-3 border rounded-lg mb-2">
-                <p className="font-semibold">
-                  {index + 1}. {answer.question.question}
-                </p>
-                <p
-                  className={`p-1 rounded ${
-                    answer.isCorrect ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                  Your Answer: {answer.userAnswer}
-                </p>
-                {!answer.isCorrect && (
-                  <p className="text-green-600">
-                    Correct Answer: {answer.question.correctAnswer}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
+        <Results
+          score={score}
+          questions={questions}
+          userAnswers={userAnswers}
+        />
       )}
-      <Link to={"/"}>
-        <Button>Reset?</Button>
-      </Link>
     </>
 
     // <>

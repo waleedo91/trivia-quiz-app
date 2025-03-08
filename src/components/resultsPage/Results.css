@@ -1,0 +1,19 @@
+.results-card {
+  border: 2px solid blue;
+  border-radius: 10px;
+  width: 50%;
+  margin: 10px auto;
+  padding: 5px;
+}
+
+.low-score {
+  color: red;
+}
+
+.high-score {
+  color: green;
+}
+
+.reset-button {
+  margin-bottom: 20px;
+}
