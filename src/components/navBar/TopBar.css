@@ -1,0 +1,22 @@
+.navigation-bar {
+  background-color: blue;
+}
+
+.site-name {
+  color: white;
+  font-weight: bold;
+}
+
+.site-name:hover {
+  color: green;
+}
+
+.brand-container {
+  height: 4rem;
+  margin-left: -10px;
+}
+
+.site-logo {
+  height: 100px;
+  width: 100px;
+}

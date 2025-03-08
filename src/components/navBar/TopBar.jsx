@@ -1,23 +1,22 @@
 // Utils
 import { Navbar, Container } from "react-bootstrap";
+import Logo from "../../images/—Pngtree—quiz time_8530811.png";
 
 // Styling
 import "./TopBar.css";
 
 function TopBar() {
   return (
-    <Navbar
-      className="bg-body-tertiary navigation-bar"
-      bg="dark"
-      data-bs-theme="dark"
-      sticky="top"
-    >
-      <Container>
-        <Navbar.Brand href="#home">
-          <img alt="" src="/img/logo.svg" className="" /> React Bootstrap
-        </Navbar.Brand>
-      </Container>
-    </Navbar>
+    <div className="navigation-bar">
+      <Navbar sticky="top">
+        <Container className="brand-container">
+          <Navbar.Brand href="/" className="site-name">
+            <img alt="quiz time logo" src={Logo} className="site-logo" /> Quiz
+            Time!!
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
+    </div>
   );
 }
 

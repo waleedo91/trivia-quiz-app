@@ -6,9 +6,11 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <Navbar fixed="bottom" className="footer" bg="dark" data-bs-theme="dark">
+    <Navbar fixed="bottom" className="footer">
       <Container>
-        <Navbar.Brand href="#">Navbar</Navbar.Brand>
+        <Navbar.Brand href="/" className="footer-brand">
+          Quiz Time! &copy;2025
+        </Navbar.Brand>
       </Container>
     </Navbar>
   );
